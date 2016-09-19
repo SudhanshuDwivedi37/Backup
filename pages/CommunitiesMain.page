@@ -1,0 +1,9 @@
+<apex:page showHeader="true" sidebar="false" controller="CommunitiesMainController">
+    <apex:form >
+        <div align="Center" style="padding-top:300px; padding-bottom:300px">
+            <h4>Welcome To Community</h4><br/>
+            <apex:commandButton action="{!login}" Value="Login"/>
+            <apex:commandButton action="{!signUp}" Value="Sign Up"/>
+        </div>
+    </apex:form>
+</apex:page>

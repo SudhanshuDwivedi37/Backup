@@ -1,0 +1,40 @@
+<apex:page Controller="NewAccount" tabStyle="Account">
+    <apex:form >
+        <apex:pageMessages />
+        <apex:pageBlock mode="edit" title="Edit">
+          
+            <apex:pageBlockButtons >
+                <apex:commandbutton action="{!testSave}" value="Save"/> 
+                <apex:commandButton action="{!testCancel}" value="Cancel" immediate="true"/>    
+            </apex:pageBlockButtons>
+            <apex:outputPanel >
+                <apex:pageBlockSection collapsible="false" columns="1" title="Account Details" >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Account owner :" /> 
+                        <apex:outputLabel value="{!$User.FirstName} {!$User.LastName}" /> 
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>     
+                <apex:pageBlockSection columns="2">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Enter your account name :" />
+                        <apex:inputField value="{!acc.name}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select the type of Account :" />
+                        <apex:inputField value="{!acc.type}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select the Parent Account :" />
+                        <apex:inputField value="{!acc.ParentId}" /> 
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select the Ownership :" />
+                        <apex:inputField value="{!acc.Ownership}" /> 
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

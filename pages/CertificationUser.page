@@ -1,0 +1,160 @@
+<apex:page controller="CertificationUserAdministrationForm" >
+
+<apex:sectionHeader title="Certification Users" subtitle="Administration Form" />
+
+<apex:form >  
+  <apex:pageMessages />
+  
+  <apex:actionFunction action="{!doProcess}" name="sortData" status="myStatus" rerender="tblData">
+     <apex:param name="sortField" assignTo="{!sortField}" value="" />
+   </apex:actionFunction>
+    
+   <apex:actionStatus stopText="" id="myStatus">
+       <apex:facet name="start">
+           <img src="/img/loading.gif" />
+       </apex:facet>
+   </apex:actionStatus>
+    
+  <apex:pageBlock > 
+  
+  <apex:pageBlockButtons >
+        <apex:commandButton value="Add User" action="{!DoAddUsers}" />
+  </apex:pageBlockButtons>
+  
+  <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+  <td width="250px">
+   <apex:commandButton disabled="{!NOT(setCon.hasPrevious)}" value="<<" action="{!setCon.first}"/>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasPrevious)}" value="<" action="{!setCon.previous}"/>&nbsp; 
+   <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) < setCon.ResultSize}" value="{!setCon.pageNumber * setCon.pageSize} of {!setCon.ResultSize}"></apex:outputText> 
+   <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) >= setCon.ResultSize}" value="{!setCon.ResultSize} of {!setCon.ResultSize}"></apex:outputText>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasNext)}" value=">" action="{!setCon.next}"/>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasNext)}" value=">>" action="{!setCon.last}"/> 
+  </td>
+  <td align="right">
+  <apex:commandLink value="All" action="{!doProcess}"><apex:param value="" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="A" action="{!doProcess}"><apex:param value="a" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="B" action="{!doProcess}"><apex:param value="b" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="C" action="{!doProcess}"><apex:param value="c" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="D" action="{!doProcess}"><apex:param value="d" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="E" action="{!doProcess}"><apex:param value="e" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="F" action="{!doProcess}"><apex:param value="f" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="G" action="{!doProcess}"><apex:param value="g" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="H" action="{!doProcess}"><apex:param value="h" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="I" action="{!doProcess}"><apex:param value="i" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="J" action="{!doProcess}"><apex:param value="j" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="K" action="{!doProcess}"><apex:param value="k" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="L" action="{!doProcess}"><apex:param value="l" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="M" action="{!doProcess}"><apex:param value="m" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="N" action="{!doProcess}"><apex:param value="n" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="O" action="{!doProcess}"><apex:param value="o" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="P" action="{!doProcess}"><apex:param value="p" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Q" action="{!doProcess}"><apex:param value="q" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="R" action="{!doProcess}"><apex:param value="r" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="S" action="{!doProcess}"><apex:param value="s" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="T" action="{!doProcess}"><apex:param value="t" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="U" action="{!doProcess}"><apex:param value="u" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="V" action="{!doProcess}"><apex:param value="v" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="W" action="{!doProcess}"><apex:param value="w" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="X" action="{!doProcess}"><apex:param value="x" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Y" action="{!doProcess}"><apex:param value="y" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Z" action="{!doProcess}"><apex:param value="z" assignTo="{!keyword}" /></apex:commandLink>
+  </td>
+  </tr>
+  </table>
+   
+  <apex:pageBlockTable value="{!CertificationUsers}" var="c" id="tblData">
+    <apex:column >
+      <apex:facet name="header">
+       Action
+      </apex:facet>
+     <apex:commandLink value="Activate" action="{!DoActiveInactive}" rendered="{!NOT(c.isActive)}">
+        <apex:param name="SelectedUserId" value="{!c.Id}" assignTo="{!SelectedUserId}" />
+     </apex:commandLink>
+     <apex:commandLink value="Deactivate" action="{!DoActiveInactive}" rendered="{!c.isActive}">
+        <apex:param name="SelectedUserId" value="{!c.Id}" assignTo="{!SelectedUserId}" />
+     </apex:commandLink>
+    </apex:column>
+    
+    <apex:column >
+      <apex:facet name="header">
+        <apex:outputLink value="javascript:void(0);" onclick="sortData('User.LastName');">Last Name<img src="{!IF(sortField = 'User.LastName',IF(isAscending = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" /></apex:outputLink>
+      </apex:facet>
+      <apex:outputField value="{!c.LastName}" />
+    </apex:column>
+    
+    <apex:column >
+      <apex:facet name="header">
+        <apex:outputLink value="javascript:void(0);" onclick="sortData('User.FirstName');">First Name<img src="{!IF(sortField = 'User.FirstName',IF(isAscending = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" /></apex:outputLink>
+      </apex:facet>
+      <apex:outputField value="{!c.FirstName}" />
+    </apex:column>
+    
+    <apex:column >
+      <apex:facet name="header">
+        <apex:outputLink value="javascript:void(0);" onclick="sortData('User.Username');">User Name<img src="{!IF(sortField = 'User.UserName',IF(isAscending = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" /></apex:outputLink>
+      </apex:facet>
+      <apex:outputField value="{!c.UserName}" />
+    </apex:column>
+     
+    <apex:column >
+      <apex:facet name="header">
+        <apex:outputLink value="javascript:void(0);" onclick="sortData('User.Email');">Email<img src="{!IF(sortField = 'User.Email',IF(isAscending = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" /></apex:outputLink>
+      </apex:facet>
+      <apex:outputField value="{!c.Email}" />
+    </apex:column>
+    
+    <apex:column >
+      <apex:facet name="header">
+        <apex:outputLink value="javascript:void(0);" onclick="sortData('isActive');">Active<img src="{!IF(sortField = 'Active__c',IF(isAscending = true, '/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif'),'/s.gif')}" /></apex:outputLink>
+      </apex:facet>
+      <apex:outputField value="{!c.isActive}" />
+    </apex:column>
+     
+  </apex:pageBlockTable>
+  
+<table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+  <td width="250px">
+   <apex:commandButton disabled="{!NOT(setCon.hasPrevious)}" value="<<" action="{!setCon.first}"/>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasPrevious)}" value="<" action="{!setCon.previous}"/>&nbsp; 
+   <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) < setCon.ResultSize}" value="{!setCon.pageNumber * setCon.pageSize} of {!setCon.ResultSize}"></apex:outputText> 
+   <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) >= setCon.ResultSize}" value="{!setCon.ResultSize} of {!setCon.ResultSize}"></apex:outputText>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasNext)}" value=">" action="{!setCon.next}"/>&nbsp; 
+   <apex:commandButton disabled="{!NOT(setCon.hasNext)}" value=">>" action="{!setCon.last}"/> 
+  </td>
+  <td align="right">
+  <apex:commandLink value="All" action="{!doProcess}"><apex:param value="" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="A" action="{!doProcess}"><apex:param value="a" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="B" action="{!doProcess}"><apex:param value="b" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="C" action="{!doProcess}"><apex:param value="c" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="D" action="{!doProcess}"><apex:param value="d" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="E" action="{!doProcess}"><apex:param value="e" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="F" action="{!doProcess}"><apex:param value="f" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="G" action="{!doProcess}"><apex:param value="g" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="H" action="{!doProcess}"><apex:param value="h" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="I" action="{!doProcess}"><apex:param value="i" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="J" action="{!doProcess}"><apex:param value="j" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="K" action="{!doProcess}"><apex:param value="k" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="L" action="{!doProcess}"><apex:param value="l" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="M" action="{!doProcess}"><apex:param value="m" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="N" action="{!doProcess}"><apex:param value="n" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="O" action="{!doProcess}"><apex:param value="o" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="P" action="{!doProcess}"><apex:param value="p" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Q" action="{!doProcess}"><apex:param value="q" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="R" action="{!doProcess}"><apex:param value="r" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="S" action="{!doProcess}"><apex:param value="s" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="T" action="{!doProcess}"><apex:param value="t" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="U" action="{!doProcess}"><apex:param value="u" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="V" action="{!doProcess}"><apex:param value="v" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="W" action="{!doProcess}"><apex:param value="w" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="X" action="{!doProcess}"><apex:param value="x" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Y" action="{!doProcess}"><apex:param value="y" assignTo="{!keyword}" /></apex:commandLink>&nbsp;|&nbsp;
+  <apex:commandLink value="Z" action="{!doProcess}"><apex:param value="z" assignTo="{!keyword}" /></apex:commandLink>
+  </td>
+  </tr>
+  </table>
+   
+</apex:pageBlock> 
+</apex:form>  
+</apex:page>

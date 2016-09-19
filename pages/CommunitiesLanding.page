@@ -1,0 +1,5 @@
+<apex:page id="communitiesLandingPage" controller="CommunitiesLandingController" action="{!forwardToStartPage}" title="{!$Label.site.site_login}">
+   <apex:pageBlock >
+            <apex:outputLink value="https://devjaipur-developer-edition.ap1.force.com/_ui/core/chatter/ui/ChatterPage">Collaboration</apex:outputLink>
+   </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,80 @@
+<apex:page id="secureRegistration" showHeader="false" sidebar="false" controller="SecureVideoUserRegistrationController" >
+    <head>
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+      <style type="text/css">
+		.button{
+			color:white !important;
+			background:blue !important;
+		}
+</style>
+    </head>
+    <apex:form styleClass="form-horizontal" >   
+    <apex:outputPanel id="errorPanel" > 
+        <apex:pageMessages />
+    </apex:outputPanel>
+    <apex:outputPanel >
+        <apex:pageBlock >
+            <div class="container" style="padding-top:200px;padding-bottom:200px" height="300px" width="300px">
+             <div align="center"><font size="10" >Create New User</font ></div>
+              <div class="panel panel-default"><br/>
+                <div class="panel-body">  
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="Full Name"></apex:OutputLabel>
+                    <div class="col-sm-10" width = "50">
+                       <apex:inputText value="{!fullName }" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="Email"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                        <apex:inputText value="{!emailAddress }" styleClass="form-control"/>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="SMS Number"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                        <apex:inputText value="{!smsNumber }" styleClass="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="Default Resolution"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                        <apex:inputText value="{!defaultResolution }" styleClass="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2"  value="Time Zone"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                        <apex:selectList styleClass="form-control" value="{!selectedIso}" size="1">
+				            <apex:selectOptions value="{!timeZone}"/>
+				        </apex:selectList>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="Help Number"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                        <apex:inputText value="{!helpNumber }" styleClass="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <apex:OutputLabel styleclass="control-label col-sm-2" value="System Roles"></apex:OutputLabel>
+                    <div class="col-sm-10">
+                         <apex:inputText value="{!systemRoles }" styleClass="form-control"/>
+                	</div>
+                </div>	
+                <div align="center">
+	                <div>
+	                    <apex:commandButton value="Submit" action="{!newUserRegistration}" styleClass="button" />
+	                    <apex:commandButton value="Update Existing User" action="{!updateExistingUser}" styleClass="button"/>
+	                	<apex:commandButton value="Create Session" action="{!scheduleSession}" styleClass="button" />
+	                	<apex:commandButton value="Login" action="{!login}" styleClass="button" />
+	                </div> 
+                </div> 
+              </div>  
+           </div> 
+         </div> 
+       </apex:pageBlock>
+    </apex:outputPanel>   
+  </apex:form>  
+
+</apex:page>

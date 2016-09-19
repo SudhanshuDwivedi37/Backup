@@ -1,0 +1,18 @@
+<apex:page controller="DemoPage2">
+  <apex:form >
+    <apex:pageBlock title="Sample"/>
+    <apex:outputText value="Enter Name"/>
+    <apex:inputText value="{!searchtext}"/>&nbsp;
+    <apex:commandButton value="click!!" action="{!ButtonClick}"/>
+    
+    <apex:outputPanel id="resultPanel">
+    <apex:outputPanel rendered="{!showOption}" id="optionPanel">
+        <apex:outputLabel value="Options"/>&nbsp;
+        <apex:selectList size="1" >
+           <apex:selectOptions value="{!options}"/>
+        </apex:selectList>
+   		
+    </apex:outputPanel>
+    </apex:outputPanel>	
+  </apex:form>
+</apex:page>

@@ -1,0 +1,20 @@
+<apex:page controller="DemoPage3">
+  <apex:form >
+    <apex:pageBlock title="Sample"/>
+    <apex:outputLabel value="Select State"/>
+    <apex:selectList size="1"  value="{!optionSelected}" >
+           <apex:selectOptions value="{!State}"/>
+           <apex:actionSupport event="onchange" action="{!ButtonClick}" />
+           
+        </apex:selectList>
+   		
+        <apex:outputLabel value="City"/>&nbsp;
+        
+        <apex:selectList size="1" >
+         
+           <apex:selectOptions value="{!city1}"/>
+           
+        </apex:selectList>
+   
+  </apex:form>
+</apex:page>
