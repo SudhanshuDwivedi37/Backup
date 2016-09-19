@@ -1,7 +1,0 @@
-<apex:page controller="SecureVideoIntegrationController">
-    <apex:form >
-        <apex:pageBlock >
-            <apex:outputText value="{!jsonResults }"></apex:outputText>
-        </apex:pageBlock>
-    </apex:form>
-</apex:page>

@@ -1,8 +1,0 @@
-<apex:page >
-    <apex:form >
-        <apex:pageBlock title="Single Sign On" >
-            <apex:outputLink value="https://testidpsf-dev-ed.my.salesforce.com/idp/login?app=0sp900000008Ot1" id="theLink">Click here to redirect to other org</apex:outputLink>
-            
-        </apex:pageBlock>
-    </apex:form>
-</apex:page>

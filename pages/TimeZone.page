@@ -1,7 +1,0 @@
-<apex:page controller="timezoneController">
-Current Date in US : {!USDateTime}
-
-<br/>
-
-Current Date in UK : {!UKDateTime}
-</apex:page>

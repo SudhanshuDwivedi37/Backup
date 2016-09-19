@@ -1,5 +1,0 @@
-<apex:page renderAs="pdf">
-    <apex:form >
-        <div>This is a PDF</div>
-    </apex:form>
-</apex:page>
