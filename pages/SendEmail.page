@@ -1,0 +1,22 @@
+<apex:page controller="EmailComposePageController" sidebar="false">
+<apex:form style="width: 70%; margin-left: 15%;">
+      <apex:pageMessages ></apex:pageMessages>
+      <apex:pageBlock title="Email">
+          TO::<apex:inputText style="width:100%" value="{!emailVal}"/><br>
+          CC::<apex:inputText style="width:100%" value="{!cc}"/> </br><br>
+          Subject::<apex:inputText style="width:100%" value="{!emailSubject}"/></br><br>
+          <apex:pageBlockSection >
+          <apex:pageBlockSectionItem >
+          <apex:inputFile value="{!att.body}" fileName="{!att.name}"/>
+          <apex:commandButton title="Upload" action="{!upload}" value="Upload"/>
+          </apex:pageBlockSectionItem>
+          <apex:repeat value="{!attList}" var="att">
+              {!att.Name}<br/>
+          </apex:repeat>
+          </apex:pageBlockSection>
+          <br/>BODY::</br><br>
+            <apex:inputTextarea style="height:300px; width:100%" value="{!body}"/></br>
+          <apex:commandButton value="Send Mail" action="{!sendMail}"/>
+      </apex:pageBlock>
+</apex:form>
+</apex:page>

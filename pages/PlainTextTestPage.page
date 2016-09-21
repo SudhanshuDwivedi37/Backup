@@ -1,0 +1,13 @@
+<apex:page controller="PlainTextTestPage">
+     <apex:form >
+         <apex:pageBlock id="pb">
+             <apex:inputTextarea value="{!htmlText}" cols="20"  richText="true"/>
+             <apex:inputTextarea value="{!plainText}" rows="20" cols="60"/><br/>
+             
+             <apex:pageBlockButtons >
+             <apex:commandButton action="{!submit}" value="Submit"/>
+             
+             </apex:pageBlockButtons> 
+         </apex:pageBlock>
+     </apex:form>
+</apex:page>

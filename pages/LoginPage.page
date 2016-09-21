@@ -1,0 +1,41 @@
+<apex:page docType="html-5.0" controller="LoginPageController" showHeader="false" sidebar="false" standardStylesheets="false">
+  <div> 
+   <apex:form styleClass="form-horizontal"> 
+     <apex:pageBlock title="Login" id="loginPanel">
+         <div>
+              <apex:outputLabel value="Username"/>
+              <div>
+                <apex:inputText value="{!username}" id="username"/>
+              </div>
+         </div>
+ 
+         <div>
+              <apex:outputLabel value="Password"/>
+              <div>
+                <apex:inputSecret id="password" value="{!password}"/>
+              </div>
+         </div>
+        <apex:commandButton action="{!login}" value="Login"/>
+        <apex:commandLink action="{!hideLoginPanel}" value="Forgot Password" />&nbsp;&nbsp;
+        <apex:commandLink action="{!notMember}" value="Not a Member" />
+      </apex:pageBlock>  
+       
+       <apex:pageBlock title="Forgot Password">
+        <div> Having Trouble Logging In?</div>
+        <div>Verify you're entering the correct user name in the form of an email address (username@company.com).
+                         Passwords are case sensitive, so ensure you don't have caps lock enabled.
+                         Your account may be temporarily disabled from too many failed login attempts.
+                         If you're logging into a sandbox account, make sure you're connected to https://test.salesforce.com.</div>
+      
+                 If you still can't log in, enter your user name to reset your password
+        <div>
+          <apex:outputLabel value="Username"/>
+              <div>
+                <apex:inputText value="{!usernameForgotPw}" id="usernameForgotPw"/>
+              </div>
+        </div>
+          <apex:commandButton action="{!forgotPassword}" value="Continue"/>      
+      </apex:pageBlock>
+    </apex:form>
+  </div>
+</apex:page>

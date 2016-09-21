@@ -1,0 +1,13 @@
+<apex:page controller="DempPage5">
+   <apex:form id="formId" >
+   <script type="text/javascript">
+			function callMessageFunc() {
+				showUserMessage();
+			}
+					</script>
+      <apex:pageBlock >
+         <apex:actionFunction name="showUserMessage" action="{!showMessage}" />
+         <apex:outputText value="Name"/>&nbsp;<apex:inputText value="{!searchText}"/>&nbsp;<apex:commandButton value="Click" />
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,49 @@
+<apex:page standardController="Opportunity" showHeader="false">
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" id="table1">
+<tr>
+    
+    <td  align="right"><font face="Arial" >
+        <b>Quote  for {!Opportunity.Account.Name}</b></font><br/>
+    </td>
+</tr>
+<hr/>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" id="table1">
+<tr>
+    <script type="text/javascript">
+        function addCommas(nStr){
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        } 
+           
+        var sortArray = Array();
+        <apex:variable var="idx" value="{!0}"/>
+        <apex:repeat value="{!Opportunity.OpportunityLineItems}" var="line">
+            sortArray[{!idx}] = new Array("{!line}","{!line.Description}",{!line.Quantity},{!line.UnitPrice},{!line.TotalPrice});
+            <apex:variable var="idx" value="{!idx+1}"/>
+        </apex:repeat>  
+        sortArray.sort();
+        for (var i = 0; i < sortArray.length; i++) {
+            <tr>
+                <td align="left">sortArray[i][1]</td>
+                <td align="left">sortArray[i][2]</td>
+                <td align="center">sortArray[i][3]</td>
+                <td align="right">addCommas(sortArray[i][4].toFixed(2))</td>
+                <td align="right">addCommas(sortArray[i][5].toFixed(2))</td>
+            </tr>
+         }
+         
+       </script>
+</tr>
+
+</table>
+</apex:page>

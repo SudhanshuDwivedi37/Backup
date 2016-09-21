@@ -1,0 +1,26 @@
+<apex:page controller="DemoPage1">
+   <apex:form >
+      <apex:pageblock title="Edit Account">
+          <apex:pageBlockButtons >
+             <apex:commandButton value="Save" action="{!saveAccount}" />
+             <apex:commandButton value="Cancel" />
+          </apex:pageBlockButtons>
+          <apex:pageBlock title="Account Information"/>
+          <apex:pageBlockSection columns="2">
+              <apex:pageBlockSectionItem >
+                 <apex:outputLabel value="Account Number" />
+                 <apex:inputField value="{!acc.AccountNumber}" />
+              </apex:pageBlockSectionItem>
+              <apex:inputField value="{!acc.Phone}" required="true"/>
+              <apex:inputField value="{!acc.Name}" />
+              <apex:inputField value="{!acc.Fax}"  />
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Custom Lead"/>
+                <apex:selectOptions value="{!IsOptions}"/>
+            </apex:pageBlockSectionItem>>
+          </apex:pageBlockSection>
+          </apex:pageblock>
+   
+   
+   </apex:form>
+</apex:page>

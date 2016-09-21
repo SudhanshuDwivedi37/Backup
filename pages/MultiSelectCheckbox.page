@@ -1,0 +1,16 @@
+<apex:page controller="TestController">
+<apex:form >
+<apex:pageBlock >
+
+    <apex:dataTable value="{!PicklistValues}" var="wrapper">
+        <apex:column >
+            {!wrapper.value}
+            <apex:inputCheckbox value="{!wrapper.isSelected}" />
+        </apex:column>
+    </apex:dataTable>
+    <apex:pageblockButtons >
+        <apex:commandButton action="{!showValues}" value="Show data"/>
+    </apex:pageblockButtons>
+</apex:pageBlock>
+</apex:form>
+</apex:page>
